@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, Layer){
+    ShapeLayer = 1,
+    ReplicatorLayer,
+    TextLayer
+};
+
 @interface ViewController : UIViewController
 
+@property (nonatomic) Layer selectedLayer;
 
 @end
 

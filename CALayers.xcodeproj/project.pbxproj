@@ -13,6 +13,7 @@
 		26480C611E2FE9A200E3145E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26480C5F1E2FE9A200E3145E /* Main.storyboard */; };
 		26480C631E2FE9A200E3145E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26480C621E2FE9A200E3145E /* Assets.xcassets */; };
 		26480C661E2FE9A200E3145E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26480C641E2FE9A200E3145E /* LaunchScreen.storyboard */; };
+		26480C6F1E2FEC3B00E3145E /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26480C6E1E2FEC3B00E3145E /* TableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		26480C621E2FE9A200E3145E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		26480C651E2FE9A200E3145E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26480C671E2FE9A200E3145E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		26480C6D1E2FEC3B00E3145E /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		26480C6E1E2FEC3B00E3145E /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +63,8 @@
 			children = (
 				26480C591E2FE9A100E3145E /* AppDelegate.h */,
 				26480C5A1E2FE9A100E3145E /* AppDelegate.m */,
+				26480C6D1E2FEC3B00E3145E /* TableViewController.h */,
+				26480C6E1E2FEC3B00E3145E /* TableViewController.m */,
 				26480C5C1E2FE9A100E3145E /* ViewController.h */,
 				26480C5D1E2FE9A100E3145E /* ViewController.m */,
 				26480C5F1E2FE9A200E3145E /* Main.storyboard */,
@@ -153,6 +158,7 @@
 				26480C5E1E2FE9A100E3145E /* ViewController.m in Sources */,
 				26480C5B1E2FE9A100E3145E /* AppDelegate.m in Sources */,
 				26480C581E2FE9A100E3145E /* main.m in Sources */,
+				26480C6F1E2FEC3B00E3145E /* TableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
