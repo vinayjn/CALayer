@@ -27,6 +27,8 @@
             break;
         case TextLayer:
             self.title = @"CATextLayer";
+            self.view.backgroundColor = [UIColor whiteColor];
+            [self addTextLayer];
             break;
     }
 }
@@ -124,5 +126,28 @@
     
 }
 
+- (void)addTextLayer {
+    
+    UIImage *haptikLogo = [UIImage imageNamed:@"Artboard"];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 300, 300)];
+    imageView.image = haptikLogo;
+    CATextLayer *textLayer = [CATextLayer layer];
+
+    textLayer.frame = imageView.bounds;
+    textLayer.rasterizationScale = [UIScreen mainScreen].scale;
+    textLayer.contentsScale = [UIScreen mainScreen].scale;
+
+    textLayer.alignmentMode = kCAAlignmentCenter;
+    textLayer.fontSize = 100.0;
+    textLayer.font = (__bridge CFTypeRef _Nullable)([UIFont systemFontOfSize:100]);
+    textLayer.wrapped = true;
+    textLayer.truncationMode = kCATruncationEnd;
+    textLayer.string = @"haptik";
+    imageView.layer.mask = textLayer;
+
+    [self.view addSubview:imageView];
+    imageView.center = self.view.center;
+
+}
 
 @end
