@@ -8,10 +8,6 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
-
-@end
-
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -26,6 +22,8 @@
             break;
         case ReplicatorLayer:
             self.title = @"CAReplicatorLayer";
+            self.view.backgroundColor = [UIColor whiteColor];
+            [self addReplicatorLayer];
             break;
         case TextLayer:
             self.title = @"CATextLayer";
@@ -40,17 +38,17 @@
     roundedRect.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 120, 120) cornerRadius:8.0].CGPath;
     roundedRect.fillColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5].CGColor;
     
-    CAShapeLayer *fullCircle = [CAShapeLayer layer];
+    CAShapeLayer *circle = [CAShapeLayer layer];
     
-    fullCircle.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(0, 0) radius:50 startAngle:0.0*(M_PI/180.0)  endAngle:360.0*(M_PI/180.0) clockwise:YES].CGPath;
-    fullCircle.lineWidth = 5.0;
+    circle.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(0, 0) radius:50 startAngle:0.0*(M_PI/180.0)  endAngle:360.0*(M_PI/180.0) clockwise:YES].CGPath;
+    circle.lineWidth = 5.0;
     
-    fullCircle.fillColor = [UIColor clearColor].CGColor;
-    fullCircle.strokeColor = [UIColor lightGrayColor].CGColor;
-    fullCircle.backgroundColor = [UIColor clearColor].CGColor;
-    fullCircle.position = CGPointMake(60, 60);
+    circle.fillColor = [UIColor clearColor].CGColor;
+    circle.strokeColor = [UIColor lightGrayColor].CGColor;
+    circle.backgroundColor = [UIColor clearColor].CGColor;
+    circle.position = CGPointMake(60, 60);
     
-    [roundedRect addSublayer:fullCircle];
+    [roundedRect addSublayer:circle];
     
     CAShapeLayer *arc = [CAShapeLayer layer];
     arc.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(0, 0) radius:50 startAngle:180.0*(M_PI/180.0)  endAngle:225.0*(M_PI/180.0) clockwise:YES].CGPath;
@@ -64,8 +62,6 @@
     animation.additive = YES;
     animation.duration = 10.0;
     animation.repeatCount = HUGE_VALF;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
     animation.values = @[
                         [NSNumber numberWithFloat:0.0 * M_PI],
                         [NSNumber numberWithFloat:1.75 * M_PI],
@@ -82,10 +78,50 @@
                                  ];
     [arc addAnimation:animation forKey:@"rotate"];
     
-    [fullCircle addSublayer:arc];
+    [circle addSublayer:arc];
     
     roundedRect.position = CGPointMake((CGRectGetMaxX(self.view.frame) - 120)/2.0, (CGRectGetMaxY(self.view.frame) - 120)/2.0);
     [self.view.layer addSublayer:roundedRect];
+}
+
+- (void)addReplicatorLayer {
+    
+    CAReplicatorLayer *replicatorLayer = [CAReplicatorLayer layer];
+    
+    UIImage *image = [UIImage imageNamed:@"haptik_logo"];
+    CALayer *imageLayer = [CALayer layer];
+    imageLayer.contents = (__bridge id)[image CGImage];
+    imageLayer.bounds = CGRectMake(0.0, 0.0, [image size].width, [image size].height);
+    imageLayer.anchorPoint = CGPointMake(0.0, 0.0);
+    
+    replicatorLayer.bounds = CGRectMake(0.0, 0.0, [image size].width, [image size].height * 2);
+    replicatorLayer.masksToBounds = YES;
+    replicatorLayer.anchorPoint = CGPointMake(0.5, 0.0);
+    replicatorLayer.position = CGPointMake(self.view.frame.size.width / 2.0, 80.0);
+    
+    [replicatorLayer addSublayer:imageLayer];
+    
+    CATransform3D transform = CATransform3DIdentity;
+    transform = CATransform3DScale(transform, 1.0, -1.0, 1.0);
+    transform = CATransform3DTranslate(transform, 0.0, -[image size].height * 2.0, 1.0);
+    
+    replicatorLayer.instanceTransform = transform;
+    replicatorLayer.instanceCount = 2;
+    
+    [self.view.layer addSublayer:replicatorLayer];
+    
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.colors = @[
+                               (__bridge id)[[[UIColor whiteColor] colorWithAlphaComponent:0.25] CGColor],
+                               (__bridge id)[[UIColor whiteColor] CGColor]
+                               ];
+    
+    gradientLayer.bounds = CGRectMake(0.0, 0.0, replicatorLayer.frame.size.width, [image size].height + 1.0);
+    
+    gradientLayer.position = CGPointMake(replicatorLayer.position.x, replicatorLayer.position.y + [image size].height * 1.5);
+    
+    [self.view.layer addSublayer:gradientLayer];
+    
 }
 
 
